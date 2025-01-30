@@ -155,17 +155,17 @@ model ModuleComponent {
   updatedAt   DateTime @updatedAt
 }
 
-model Assessment {
-  id          String   @id @default(cuid())
-  type        String   // e.g., "MCQ", "FileUpload"
-  question    String?  // For MCQ
-  options     String[] // For MCQ
-  correctAnswer String? // For MCQ
-  filePrompt  String?  // For FileUpload
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+enum AssessmentType {
+  MCQ
+  FileUpload
+}
 
-  // Foreign key here
-  module      Module   @relation("ModuleAssessments", fields: [moduleId], references: [id], onDelete: Cascade)
+model Assessment {
+  id          String         @id @default(cuid())
+  type        AssessmentType // Use the enum
+  metadata    Json?          // Store additional data like question, options, etc.
+  module      Module         @relation(fields: [moduleId], references: [id], onDelete: Cascade)
   moduleId    String
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
 }
