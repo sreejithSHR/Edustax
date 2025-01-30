@@ -1,6 +1,5 @@
 import { useState } from "react";
-
-import { Assessment, ModuleComponent } from "@prisma/client"; // Import types from Prisma client
+import { Assessment } from "@prisma/client"; // Ensure this import works
 
 export default function AssessmentEditor({
   assessment,
@@ -10,7 +9,7 @@ export default function AssessmentEditor({
   onSave: (assessment: Assessment) => void;
 }) {
   const [type, setType] = useState<"MCQ" | "FileUpload">(
-    assessment?.type || "MCQ",
+    (assessment?.type as "MCQ" | "FileUpload") || "MCQ",
   );
   const [question, setQuestion] = useState(assessment?.question || "");
   const [options, setOptions] = useState<string[]>(assessment?.options || []);
@@ -23,10 +22,13 @@ export default function AssessmentEditor({
     const newAssessment: Assessment = {
       id: assessment?.id || Date.now().toString(), // Generate a unique ID
       type,
-      question: type === "MCQ" ? question : undefined,
-      options: type === "MCQ" ? options : undefined,
-      correctAnswer: type === "MCQ" ? correctAnswer : undefined,
-      filePrompt: type === "FileUpload" ? filePrompt : undefined,
+      question: type === "MCQ" ? question : null,
+      options: type === "MCQ" ? options : [],
+      correctAnswer: type === "MCQ" ? correctAnswer : null,
+      filePrompt: type === "FileUpload" ? filePrompt : null,
+      moduleId: assessment?.moduleId || "", // Ensure moduleId is provided
+      createdAt: assessment?.createdAt || new Date(),
+      updatedAt: new Date(),
     };
     onSave(newAssessment);
   };
