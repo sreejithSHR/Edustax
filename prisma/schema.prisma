@@ -162,10 +162,13 @@ enum AssessmentType {
 
 model Assessment {
   id          String         @id @default(cuid())
-  type        AssessmentType // Use the enum
-  metadata    Json?          // Store additional data like question, options, etc.
-  module      Module         @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  type        AssessmentType
+  metadata    Json?
   moduleId    String
+
+  // Fix: Add @relation name to match the one in Module
+  module      Module         @relation("ModuleAssessments", fields: [moduleId], references: [id], onDelete: Cascade)
+
   createdAt   DateTime       @default(now())
   updatedAt   DateTime       @updatedAt
 }
