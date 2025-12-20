@@ -13988,6 +13988,32 @@ ul[data-type="taskList"] li[data-checked="true"] > div > p {
 }.__variable_f367f3 {--font-inter: '__Inter_f367f3', '__Inter_Fallback_f367f3'
 }
 
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[3].use[1]!./node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js??ruleSet[1].rules[12].oneOf[3].use[2]!./node_modules/next/font/local/target.css?{"path":"styles/fonts.ts","import":"","arguments":[{"src":"./CalSans-SemiBold.otf","variable":"--font-cal","weight":"600","display":"swap"}],"variableName":"cal"} ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+@font-face {
+font-family: '__cal_edfe9c';
+src: url(/_next/static/media/5dfb1d0134f1564c-s.p.otf) format('opentype');
+font-display: swap;
+font-weight: 600;
+}@font-face {font-family: '__cal_Fallback_edfe9c';src: local("Arial");ascent-override: 98.60%;descent-override: 19.72%;line-gap-override: 0.00%;size-adjust: 101.42%
+}.__className_edfe9c {font-family: '__cal_edfe9c', '__cal_Fallback_edfe9c';font-weight: 600
+}.__variable_edfe9c {--font-cal: '__cal_edfe9c', '__cal_Fallback_edfe9c'
+}
+
+/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[3].use[1]!./node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js??ruleSet[1].rules[12].oneOf[3].use[2]!./node_modules/next/font/local/target.css?{"path":"styles/fonts.ts","import":"","arguments":[{"src":"./CalSans-SemiBold.otf","variable":"--font-title","weight":"600","display":"swap"}],"variableName":"calTitle"} ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+@font-face {
+font-family: '__calTitle_3d483c';
+src: url(/_next/static/media/5dfb1d0134f1564c-s.p.otf) format('opentype');
+font-display: swap;
+font-weight: 600;
+}@font-face {font-family: '__calTitle_Fallback_3d483c';src: local("Arial");ascent-override: 98.60%;descent-override: 19.72%;line-gap-override: 0.00%;size-adjust: 101.42%
+}.__className_3d483c {font-family: '__calTitle_3d483c', '__calTitle_Fallback_3d483c';font-weight: 600
+}.__variable_3d483c {--font-title: '__calTitle_3d483c', '__calTitle_Fallback_3d483c'
+}
+
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[2].use[1]!./node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js??ruleSet[1].rules[12].oneOf[2].use[2]!./node_modules/next/font/google/target.css?{"path":"styles/fonts.ts","import":"Lora","arguments":[{"variable":"--font-title","subsets":["latin"],"weight":"600","display":"swap"}],"variableName":"lora"} ***!
   \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
@@ -14090,31 +14116,5 @@ ul[data-type="taskList"] li[data-checked="true"] > div > p {
 }@font-face {font-family: '__Work_Sans_Fallback_3417eb';src: local("Arial");ascent-override: 82.10%;descent-override: 21.45%;line-gap-override: 0.00%;size-adjust: 113.27%
 }.__className_3417eb {font-family: '__Work_Sans_3417eb', '__Work_Sans_Fallback_3417eb';font-weight: 600;font-style: normal
 }.__variable_3417eb {--font-title: '__Work_Sans_3417eb', '__Work_Sans_Fallback_3417eb'
-}
-
-/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[3].use[1]!./node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js??ruleSet[1].rules[12].oneOf[3].use[2]!./node_modules/next/font/local/target.css?{"path":"styles/fonts.ts","import":"","arguments":[{"src":"./CalSans-SemiBold.otf","variable":"--font-cal","weight":"600","display":"swap"}],"variableName":"cal"} ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-@font-face {
-font-family: '__cal_edfe9c';
-src: url(/_next/static/media/5dfb1d0134f1564c-s.p.otf) format('opentype');
-font-display: swap;
-font-weight: 600;
-}@font-face {font-family: '__cal_Fallback_edfe9c';src: local("Arial");ascent-override: 98.60%;descent-override: 19.72%;line-gap-override: 0.00%;size-adjust: 101.42%
-}.__className_edfe9c {font-family: '__cal_edfe9c', '__cal_Fallback_edfe9c';font-weight: 600
-}.__variable_edfe9c {--font-cal: '__cal_edfe9c', '__cal_Fallback_edfe9c'
-}
-
-/*!***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[12].oneOf[3].use[1]!./node_modules/next/dist/build/webpack/loaders/next-font-loader/index.js??ruleSet[1].rules[12].oneOf[3].use[2]!./node_modules/next/font/local/target.css?{"path":"styles/fonts.ts","import":"","arguments":[{"src":"./CalSans-SemiBold.otf","variable":"--font-title","weight":"600","display":"swap"}],"variableName":"calTitle"} ***!
-  \***********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
-@font-face {
-font-family: '__calTitle_3d483c';
-src: url(/_next/static/media/5dfb1d0134f1564c-s.p.otf) format('opentype');
-font-display: swap;
-font-weight: 600;
-}@font-face {font-family: '__calTitle_Fallback_3d483c';src: local("Arial");ascent-override: 98.60%;descent-override: 19.72%;line-gap-override: 0.00%;size-adjust: 101.42%
-}.__className_3d483c {font-family: '__calTitle_3d483c', '__calTitle_Fallback_3d483c';font-weight: 600
-}.__variable_3d483c {--font-title: '__calTitle_3d483c', '__calTitle_Fallback_3d483c'
 }
 
