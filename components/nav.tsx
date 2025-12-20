@@ -4,6 +4,7 @@ import Link from "next/link";
 import {
   ArrowLeft,
   BarChart3,
+  BookOpen,
   Edit3,
   Globe,
   Layout,
@@ -117,7 +118,13 @@ export default function Nav({ children }: { children: ReactNode }) {
         icon: <LayoutDashboard width={18} />,
       },
       {
-        name: "Courses",
+        name: "LMS Courses",
+        href: "/courses",
+        isActive: segments[0] === "courses" || segments[0] === "lessons",
+        icon: <BookOpen width={18} />,
+      },
+      {
+        name: "Sites",
         href: "/sites",
         isActive: segments[0] === "sites",
         icon: <Globe width={18} />,

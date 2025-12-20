@@ -3,50 +3,44 @@ import { getToken } from "next-auth/jwt";
 
 export const config = {
   matcher: [
-    /*
-     * Match all paths except for:
-     * 1. /api routes
-     * 2. /_next (Next.js internals)
-     * 3. /_static (inside /public)
-     * 4. all root files inside /public (e.g. /favicon.ico)
-     */
     "/((?!api/|_next/|_static/|_vercel|[\\w-]+\\.\\w+).*)",
   ],
 };
 
 export default async function middleware(req: NextRequest) {
   const url = req.nextUrl;
-
-  // Get hostname of request (e.g. demo.vercel.pub, demo.localhost:3000)
   const hostname = req.headers
     .get("host")!
     .replace(".localhost:3000", `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`);
-
-  // Get the pathname of the request (e.g. /, /about, /blog/first-post)
   const path = url.pathname;
 
-  // rewrites for app pages
+  // Admin dashboard (app.domain.com)
   if (hostname == `app.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`) {
     const session = await getToken({ req });
+
+    // Student routes blocked on admin
+    if (path.startsWith("/student") || path.startsWith("/courses")) {
+      return NextResponse.redirect(new URL("/", req.url));
+    }
+
     if (!session && path !== "/login") {
       return NextResponse.redirect(new URL("/login", req.url));
     } else if (session && path == "/login") {
       return NextResponse.redirect(new URL("/", req.url));
     }
+
     return NextResponse.rewrite(
       new URL(`/app${path === "/" ? "" : path}`, req.url),
     );
   }
 
-
-  // special case for `vercel.pub` domain
+  // Root domain
   if (hostname === "vercel.pub") {
     return NextResponse.redirect(
       "https://vercel.com/blog/platforms-starter-kit",
     );
   }
-  
-  // rewrite root application to `/home` folder
+
   if (
     hostname === "localhost:3000" ||
     hostname === process.env.NEXT_PUBLIC_ROOT_DOMAIN
@@ -54,6 +48,40 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.rewrite(new URL(`/home${path}`, req.url));
   }
 
-  // rewrite everything else to `/[domain]/[path] dynamic route
+  // Student LMS (slug.domain.com)
+  // Check if it's a subdomain
+  const subdomain = hostname.replace(`.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`, "");
+
+  if (subdomain !== hostname) {
+    // It's a subdomain - student LMS
+    const studentSession = req.cookies.get("student-session")?.value;
+
+    // Block admin routes on student subdomains
+    if (
+      path.startsWith("/site/") ||
+      path.startsWith("/post/") ||
+      path.startsWith("/sites") ||
+      path.startsWith("/settings")
+    ) {
+      return NextResponse.redirect(new URL("/", req.url));
+    }
+
+    // Require auth for student routes
+    if (
+      !studentSession &&
+      !path.startsWith("/login") &&
+      !path.startsWith("/signup") &&
+      path !== "/"
+    ) {
+      return NextResponse.redirect(new URL("/login", req.url));
+    }
+
+    // Inject siteId for student routes
+    const response = NextResponse.rewrite(new URL(`/${hostname}${path}`, req.url));
+    response.headers.set("x-tenant-subdomain", subdomain);
+    return response;
+  }
+
+  // Default: rewrite to [domain] route
   return NextResponse.rewrite(new URL(`/${hostname}${path}`, req.url));
 }

@@ -33,6 +33,7 @@
     "@vercel/kv": "^0.2.2",
     "@vercel/postgres": "^0.3.2",
     "ai": "^2.1.17",
+    "bcryptjs": "^2.4.3",
     "clsx": "^1.2.1",
     "date-fns": "^2.30.0",
     "focus-trap-react": "^10.2.1",
@@ -64,6 +65,7 @@
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
+    "@types/bcryptjs": "^2.4.6",
     "@types/js-cookie": "^3.0.3",
     "@types/node": "^20.4.1",
     "@types/react": "^18.2.14",
