@@ -6,15 +6,14 @@ import LessonEditor from "./lesson-editor";
 export default async function AdminLessonPage({
   params,
 }: {
-  params: { id: string };
-}) {
+  params: { courseId: string };}) {
   const session = await getSession();
   if (!session) {
     redirect("/login");
   }
 
   const lesson = await prisma.lesson.findUnique({
-    where: { id: params.id },
+    where: { id: params.courseId },
     include: {
       course: {
         include: { site: true },

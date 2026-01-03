@@ -6,11 +6,10 @@ import DeleteSiteForm from "@/components/form/delete-site-form";
 export default async function SiteSettingsIndex({
   params,
 }: {
-  params: { id: string };
-}) {
+  params: { courseId: string };}) {
   const data = await prisma.site.findUnique({
     where: {
-      id: params.id,
+      id: params.courseId,
     },
   });
 

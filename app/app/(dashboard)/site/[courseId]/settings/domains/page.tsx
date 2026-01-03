@@ -5,11 +5,10 @@ import { updateSite } from "@/lib/actions";
 export default async function SiteSettingsDomains({
   params,
 }: {
-  params: { id: string };
-}) {
+  params: { courseId: string };}) {
   const data = await prisma.site.findUnique({
     where: {
-      id: params.id,
+      id: params.courseId,
     },
   });
 

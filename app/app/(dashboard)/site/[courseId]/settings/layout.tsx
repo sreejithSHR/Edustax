@@ -8,8 +8,7 @@ export default async function SiteAnalyticsLayout({
   params,
   children,
 }: {
-  params: { id: string };
-  children: ReactNode;
+  params: { courseId: string };  children: ReactNode;
 }) {
   const session = await getSession();
   if (!session) {
@@ -17,7 +16,7 @@ export default async function SiteAnalyticsLayout({
   }
   const data = await prisma.site.findUnique({
     where: {
-      id: params.id,
+      id: params.courseId,
     },
   });
 

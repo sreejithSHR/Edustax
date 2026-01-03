@@ -8,15 +8,14 @@ import PublishButton from "./publish-button";
 export default async function AdminCoursePage({
   params,
 }: {
-  params: { id: string };
-}) {
+  params: { courseId: string };}) {
   const session = await getSession();
   if (!session) {
     redirect("/login");
   }
 
   const course = await prisma.course.findUnique({
-    where: { id: params.id },
+    where: { id: params.courseId },
     include: {
       site: true,
       lessons: {

@@ -7,7 +7,7 @@ import MarkCompleteButton from "./mark-complete-button";
 export default async function LessonPage({
   params,
 }: {
-  params: { id: string };
+  params: { courseId: string };
 }) {
   const site = await getTenantFromHeaders();
   const student = await getStudentSession();
@@ -17,7 +17,7 @@ export default async function LessonPage({
   }
 
   const lesson = await prisma.lesson.findUnique({
-    where: { id: params.id },
+    where: { id: params.courseId },
     include: { course: true },
   });
 

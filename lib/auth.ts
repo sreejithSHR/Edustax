@@ -6,6 +6,10 @@ import { cookies, headers } from "next/headers";
 
 const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 
+/* -------------------------------------------------------------------------- */
+/*                                NEXT AUTH                                   */
+/* -------------------------------------------------------------------------- */
+
 export const authOptions: NextAuthOptions = {
   providers: [
     GitHubProvider({
@@ -22,13 +26,19 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
-  pages: {
-    signIn: `/login`,
-    verifyRequest: `/login`,
-    error: "/login", // Error code passed in query string as ?error=
-  },
+
   adapter: PrismaAdapter(prisma),
-  session: { strategy: "jwt" },
+
+  session: {
+    strategy: "jwt",
+  },
+
+  pages: {
+    signIn: "/login",
+    verifyRequest: "/login",
+    error: "/login",
+  },
+
   cookies: {
     sessionToken: {
       name: `${VERCEL_DEPLOYMENT ? "__Secure-" : ""}next-auth.session-token`,
@@ -36,7 +46,6 @@ export const authOptions: NextAuthOptions = {
         httpOnly: true,
         sameSite: "lax",
         path: "/",
-        // When working on localhost, the cookie domain must be omitted entirely (https://stackoverflow.com/a/1188145)
         domain: VERCEL_DEPLOYMENT
           ? `.${process.env.NEXT_PUBLIC_ROOT_DOMAIN}`
           : undefined,
@@ -44,6 +53,7 @@ export const authOptions: NextAuthOptions = {
       },
     },
   },
+
   callbacks: {
     jwt: async ({ token, user }) => {
       if (user) {
@@ -51,6 +61,7 @@ export const authOptions: NextAuthOptions = {
       }
       return token;
     },
+
     session: async ({ session, token }) => {
       session.user = {
         ...session.user,
@@ -64,12 +75,15 @@ export const authOptions: NextAuthOptions = {
   },
 };
 
-// Updated for Next.js 15 - await dynamic APIs
+/* -------------------------------------------------------------------------- */
+/*                             SESSION HELPER                                 */
+/* -------------------------------------------------------------------------- */
+
 export async function getSession() {
-  // Await headers and cookies to satisfy Next.js 15 requirements
+  // Required for Next.js App Router (Next 14/15)
   await headers();
   await cookies();
-  
+
   return getServerSession(authOptions) as Promise<{
     user: {
       id: string;
@@ -81,23 +95,43 @@ export async function getSession() {
   } | null>;
 }
 
+/* -------------------------------------------------------------------------- */
+/*                         SITE-BASED AUTH (SAFE)                              */
+/* -------------------------------------------------------------------------- */
+/**
+ * Preserves original Next Platforms logic:
+ * - One user
+ * - One site per user
+ * - Explicit siteId passed from route
+ *
+ * Adds HARD GUARDS to prevent Prisma crashes.
+ */
 export function withSiteAuth(action: any) {
   return async (
     formData: FormData | null,
-    siteId: string,
+    siteId: string | undefined,
     key: string | null,
   ) => {
+    // 🚨 HARD GUARD — prevents prisma.site.findUnique({ id: undefined })
+    if (!siteId) {
+      return {
+        error: "Missing siteId",
+      };
+    }
+
     const session = await getSession();
     if (!session) {
       return {
         error: "Not authenticated",
       };
     }
+
     const site = await prisma.site.findUnique({
       where: {
         id: siteId,
       },
     });
+
     if (!site || site.userId !== session.user.id) {
       return {
         error: "Not authorized",
@@ -108,18 +142,32 @@ export function withSiteAuth(action: any) {
   };
 }
 
+/* -------------------------------------------------------------------------- */
+/*                         POST-BASED AUTH (SAFE)                              */
+/* -------------------------------------------------------------------------- */
+/**
+ * Blog-era helper (unchanged behavior)
+ * Guarded to prevent runtime crashes
+ */
 export function withPostAuth(action: any) {
   return async (
     formData: FormData | null,
-    postId: string,
+    postId: string | undefined,
     key: string | null,
   ) => {
+    if (!postId) {
+      return {
+        error: "Missing postId",
+      };
+    }
+
     const session = await getSession();
-    if (!session?.user.id) {
+    if (!session?.user?.id) {
       return {
         error: "Not authenticated",
       };
     }
+
     const post = await prisma.post.findUnique({
       where: {
         id: postId,
@@ -128,9 +176,10 @@ export function withPostAuth(action: any) {
         site: true,
       },
     });
+
     if (!post || post.userId !== session.user.id) {
       return {
-        error: "Post not found",
+        error: "Post not found or not authorized",
       };
     }
 

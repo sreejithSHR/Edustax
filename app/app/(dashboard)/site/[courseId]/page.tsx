@@ -7,7 +7,8 @@ import CreatePostButton from "@/components/create-post-button";
 export default async function SitePosts({
   params,
 }: {
-  params: { id: string };
+  params: { courseId: string };
+
 }) {
   const session = await getSession();
   if (!session) {
@@ -15,7 +16,7 @@ export default async function SitePosts({
   }
   const data = await prisma.site.findUnique({
     where: {
-      id: params.id,
+      id: params.courseId,
     },
   });
 
@@ -47,7 +48,7 @@ export default async function SitePosts({
         </div>
         <CreatePostButton />
       </div>
-      <Posts siteId={params.id} />
+      <Posts siteId={params.courseId} />
     </>
   );
 }

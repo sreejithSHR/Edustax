@@ -6,6 +6,23 @@
       "static/css/app/layout.css",
       "static/chunks/app/layout.js"
     ],
+    "/[domain]/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/[domain]/layout.css",
+      "static/chunks/app/[domain]/layout.js"
+    ],
+    "/[domain]/[slug]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/[domain]/[slug]/page.css",
+      "static/chunks/app/[domain]/[slug]/page.js"
+    ],
+    "/[domain]/[slug]/not-found": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[domain]/[slug]/not-found.js"
+    ],
     "/app/(dashboard)/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
@@ -22,12 +39,6 @@
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/chunks/app/app/(dashboard)/layout.js"
-    ],
-    "/app/(dashboard)/sites/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/app/(dashboard)/sites/page.css",
-      "static/chunks/app/app/(dashboard)/sites/page.js"
     ],
     "/app/(dashboard)/site/[courseId]/page": [
       "static/chunks/webpack.js",
@@ -50,43 +61,32 @@
       "static/chunks/main-app.js",
       "static/chunks/app/app/(dashboard)/site/[courseId]/loading.js"
     ],
-    "/home/page": [
+    "/app/(dashboard)/post/[courseId]/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/home/page.js"
+      "static/chunks/app/app/(dashboard)/post/[courseId]/layout.js"
     ],
-    "/[domain]/layout": [
+    "/app/(dashboard)/post/[courseId]/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/[domain]/layout.css",
-      "static/chunks/app/[domain]/layout.js"
+      "static/css/app/app/(dashboard)/post/[courseId]/page.css",
+      "static/chunks/app/app/(dashboard)/post/[courseId]/page.js"
     ],
-    "/[domain]/page": [
+    "/app/(dashboard)/post/[courseId]/loading": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/css/app/[domain]/page.css",
-      "static/chunks/app/[domain]/page.js"
+      "static/chunks/app/app/(dashboard)/post/[courseId]/loading.js"
     ],
-    "/[domain]/login/page": [
+    "/app/(dashboard)/post/[courseId]/not-found": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/[domain]/login/page.js"
+      "static/chunks/app/app/(dashboard)/post/[courseId]/not-found.js"
     ],
-    "/[domain]/courses/page": [
+    "/app/(dashboard)/sites/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/[domain]/courses/page.js"
-    ],
-    "/app/(auth)/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/app/(auth)/layout.js"
-    ],
-    "/app/(auth)/login/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/app/(auth)/login/page.css",
-      "static/chunks/app/app/(auth)/login/page.js"
+      "static/css/app/app/(dashboard)/sites/page.css",
+      "static/chunks/app/app/(dashboard)/sites/page.js"
     ]
   }
 }

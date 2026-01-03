@@ -6,15 +6,14 @@ import AnalyticsMockup from "@/components/analytics";
 export default async function SiteAnalytics({
   params,
 }: {
-  params: { id: string };
-}) {
+  params: { courseId: string };}) {
   const session = await getSession();
   if (!session) {
     redirect("/login");
   }
   const data = await prisma.site.findUnique({
     where: {
-      id: params.id,
+      id: params.courseId,
     },
   });
   if (!data || data.userId !== session.user.id) {
