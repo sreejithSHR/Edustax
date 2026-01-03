@@ -35,7 +35,7 @@ export default function StudentLoginForm({ siteId }: { siteId: string }) {
         </div>
       )}
       <div>
-        <label htmlFor="email" className="block text-sm font-medium">
+        <label htmlFor="email" className="block text-white text-sm font-medium">
           Email
         </label>
         <input
@@ -48,7 +48,7 @@ export default function StudentLoginForm({ siteId }: { siteId: string }) {
         />
       </div>
       <div>
-        <label htmlFor="password" className="block text-sm font-medium">
+        <label htmlFor="password" className="block text-white text-sm font-medium">
           Password
         </label>
         <input
@@ -63,7 +63,7 @@ export default function StudentLoginForm({ siteId }: { siteId: string }) {
       <button
         type="submit"
         disabled={loading}
-        className="w-full rounded-md bg-black px-4 py-2 text-white disabled:opacity-50"
+        className="w-full stroke-white rounded-md  bg-black px-4 py-2 text-white disabled:opacity-50"
       >
         {loading ? "Signing in..." : "Sign in"}
       </button>

@@ -87,6 +87,22 @@
       "static/chunks/main-app.js",
       "static/css/app/app/(dashboard)/sites/page.css",
       "static/chunks/app/app/(dashboard)/sites/page.js"
+    ],
+    "/[domain]/courses/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[domain]/courses/page.js"
+    ],
+    "/[domain]/login/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/[domain]/login/page.js"
+    ],
+    "/[domain]/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/[domain]/page.css",
+      "static/chunks/app/[domain]/page.js"
     ]
   }
 }

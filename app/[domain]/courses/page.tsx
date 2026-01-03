@@ -26,7 +26,7 @@ export default async function StudentCoursesPage() {
   return (
     <div className="mx-auto max-w-7xl px-4 py-8">
       <div className="mb-8 flex items-center justify-between">
-        <h1 className="text-3xl font-bold">Courses</h1>
+        <h1 className="text-3xl text-white font-bold">Courses</h1>
         <Link
           href="/logout"
           className="rounded-md bg-gray-200 px-4 py-2 text-sm"
@@ -37,7 +37,7 @@ export default async function StudentCoursesPage() {
 
       {enrollments.length > 0 && (
         <div className="mb-12">
-          <h2 className="mb-4 text-2xl font-semibold">My Courses</h2>
+          <h2 className="mb-4 text-2xl text-white font-semibold">My Courses</h2>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {enrollments.map((enrollment) => (
               <Link
@@ -58,7 +58,7 @@ export default async function StudentCoursesPage() {
       )}
 
       <div>
-        <h2 className="mb-4 text-2xl font-semibold">Available Courses</h2>
+        <h2 className="mb-4 text-2xl text-white font-semibold">Available Courses</h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {courses
             .filter((c) => !enrolledIds.has(c.id))

@@ -233,14 +233,16 @@ export const getSiteFromPostId = async (postId: string) => {
 export const createPost = withSiteAuth(async (_: FormData, site: Site) => {
   const session = await getSession();
   if (!session?.user.id) {
-    return {
-      error: "Not authenticated",
-    };
+    return { error: "Not authenticated" };
   }
-  const response = await prisma.post.create({
+
+  const post = await prisma.post.create({
     data: {
       siteId: site.id,
       userId: session.user.id,
+    },
+    select: {
+      id: true,
     },
   });
 
@@ -249,8 +251,9 @@ export const createPost = withSiteAuth(async (_: FormData, site: Site) => {
   );
   site.customDomain && (await revalidateTag(`${site.customDomain}-posts`));
 
-  return response;
+  return { id: post.id };
 });
+
 
 // creating a separate function for this because we're not using FormData
 export const updatePost = async (data: Post) => {

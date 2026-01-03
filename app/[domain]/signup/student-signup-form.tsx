@@ -36,7 +36,7 @@ export default function StudentSignupForm({ siteId }: { siteId: string }) {
         </div>
       )}
       <div>
-        <label htmlFor="name" className="block text-sm font-medium">
+        <label htmlFor="name" className="block text-white text-sm font-medium">
           Name
         </label>
         <input
@@ -49,7 +49,7 @@ export default function StudentSignupForm({ siteId }: { siteId: string }) {
         />
       </div>
       <div>
-        <label htmlFor="email" className="block text-sm font-medium">
+        <label htmlFor="email" className="block text-white  text-sm font-medium">
           Email
         </label>
         <input
@@ -62,7 +62,7 @@ export default function StudentSignupForm({ siteId }: { siteId: string }) {
         />
       </div>
       <div>
-        <label htmlFor="password" className="block text-sm font-medium">
+        <label htmlFor="password" className="block text-white text-sm font-medium">
           Password
         </label>
         <input

@@ -19,14 +19,14 @@ export default async function StudentLoginPage() {
     <div className="flex min-h-screen items-center justify-center">
       <div className="w-full max-w-md space-y-8 rounded-lg border p-8">
         <div>
-          <h2 className="text-center text-3xl font-bold">
+          <h2 className="text-center text-3xl text-white font-bold">
             Sign in to {site.name}
           </h2>
         </div>
         <StudentLoginForm siteId={site.id} />
-        <div className="text-center text-sm">
+        <div className="text-center text-white text-sm">
           Don't have an account?{" "}
-          <a href="/signup" className="font-medium underline">
+          <a href="/signup" className="font-medium text-white underline">
             Sign up
           </a>
         </div>

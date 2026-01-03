@@ -9,17 +9,28 @@ import va from "@vercel/analytics";
 
 export default function CreatePostButton() {
   const router = useRouter();
-  const { id } = useParams() as { id: string };
+  const { courseId } = useParams() as { courseId: string };
   const [isPending, startTransition] = useTransition();
 
   return (
     <button
       onClick={() =>
         startTransition(async () => {
-          const post = await createPost(null, id, null);
+          if (!courseId) {
+            alert("Missing site ID");
+            return;
+          }
+
+          const res = await createPost(null, courseId, null);
+
+          if ("error" in res) {
+            alert(res.error);
+            return;
+          }
+
           va.track("Created Post");
           router.refresh();
-          router.push(`/post/${post.id}`);
+          router.push(`/post/${res.id}`);
         })
       }
       className={cn(
@@ -30,7 +41,7 @@ export default function CreatePostButton() {
       )}
       disabled={isPending}
     >
-      {isPending ? <LoadingDots color="#808080" /> : <p>Create New Courses </p>}
+      {isPending ? <LoadingDots color="#808080" /> : <p>Create New Course</p>}
     </button>
   );
 }
