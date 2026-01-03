@@ -2,6 +2,7 @@ import { getServerSession, type NextAuthOptions } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import prisma from "@/lib/prisma";
+import { cookies, headers } from "next/headers";
 
 const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 
@@ -63,7 +64,12 @@ export const authOptions: NextAuthOptions = {
   },
 };
 
-export function getSession() {
+// Updated for Next.js 15 - await dynamic APIs
+export async function getSession() {
+  // Await headers and cookies to satisfy Next.js 15 requirements
+  await headers();
+  await cookies();
+  
   return getServerSession(authOptions) as Promise<{
     user: {
       id: string;
